@@ -1,0 +1,95 @@
+MariaDB [(none)]> CREATE DATABASE task_manager;
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [(none)]> USE task_manager;
+Database changed
+MariaDB [task_manager]> CREATE TABLE task_dailies
+    -> ( id char(36) Primary Key,
+    -> user_id varchar(255),
+    -> task_status enum('Pending','Process','Finished','Canceled'),
+    -> plan_id varchar(255),
+    -> task_complete_date date,
+    -> user_verify_id varchar(255),
+    -> task_prove varchar(255),
+    -> task_comments longtext
+    -> );
+Query OK, 0 rows affected (0.489 sec)
+
+MariaDB [task_manager]> SHOW TABLES;
++------------------------+
+| Tables_in_task_manager |
++------------------------+
+| task_dailies           |
++------------------------+
+1 row in set (0.004 sec)
+
+MariaDB [task_manager]> DESC task_dailies;
++--------------------+-------------------------------------------------+------+-----+---------+-------+
+| Field              | Type                                            | Null | Key | Default | Extra |
++--------------------+-------------------------------------------------+------+-----+---------+-------+
+| id                 | char(36)                                        | NO   | PRI | NULL    |       |
+| user_id            | varchar(255)                                    | YES  |     | NULL    |       |
+| task_status        | enum('Pending','Process','Finished','Canceled') | YES  |     | NULL    |       |
+| plan_id            | varchar(255)                                    | YES  |     | NULL    |       |
+| task_complete_date | date                                            | YES  |     | NULL    |       |
+| user_verify_id     | varchar(255)                                    | YES  |     | NULL    |       |
+| task_prove         | varchar(255)                                    | YES  |     | NULL    |       |
+| task_comments      | longtext                                        | YES  |     | NULL    |       |
++--------------------+-------------------------------------------------+------+-----+---------+-------+
+8 rows in set (0.050 sec)
+
+MariaDB [task_manager]> CREATE TABLE task_persons
+    -> ( id char(36) Primary Key,
+    -> task_id varchar(255),
+    -> teams varchar(255),
+    -> created_at timestamp
+    -> );
+Query OK, 0 rows affected (0.286 sec)
+
+MariaDB [task_manager]> CREATE TABLE task_plans
+    -> ( id char(36) Primary Key,
+    -> task_name varchar(255),
+    -> ask_duration_start date,
+    -> task_duration_end date,
+    -> user_create varchar(255),
+    -> category_id varchar(255),
+    -> indicators_id varchar(255),
+    -> task_priority int,
+    -> task_status enum('Pending','Process','Finished','Canceled'),
+    -> created_at timestamp,
+    -> updated_at timestamp
+    -> );
+ERROR 1067 (42000): Invalid default value for 'updated_at'
+MariaDB [task_manager]> CREATE TABLE task_plans
+    -> ( id char(36) Primary Key,
+    -> task_name varchar(255),
+    -> ask_duration_start date,
+    -> task_duration_end date,
+    -> user_create varchar(255),
+    -> category_id varchar(255),
+    -> indicators_id varchar(255),
+    -> task_priority int,
+    -> task_status enum('Pending','Process','Finished','Canceled'),
+    -> created_at timestamp
+    -> );
+Query OK, 0 rows affected (0.727 sec)
+
+MariaDB [task_manager]> CREATE TABLE task_indicators
+    -> ( id char(36) Primary Key,
+    -> indicator_name varchar(255),
+    -> output_value int,
+    -> created_at timestamp
+    -> );
+Query OK, 0 rows affected (0.354 sec)
+
+MariaDB [task_manager]> CREATE TABLE users
+    -> ( id char(36) Primary Key,
+    -> name varchar(255),
+    -> email varchar(255),
+    -> email_verified_at timestamp,
+    -> password varchar(255),
+    -> remember_token varchar(100)
+    -> );
+Query OK, 0 rows affected (0.861 sec)
+
+MariaDB [task_manager]> notee
